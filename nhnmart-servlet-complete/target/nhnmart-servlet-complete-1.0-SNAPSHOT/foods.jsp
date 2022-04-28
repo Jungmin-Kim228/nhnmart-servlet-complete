@@ -16,8 +16,6 @@
         </ul>
     </c:forEach>
 </ol>
-
-
 <hr>
 <h1>Pick Foods You Want</h1>
 <form method="post" action="${pageContext.request.contextPath}/cart.do">

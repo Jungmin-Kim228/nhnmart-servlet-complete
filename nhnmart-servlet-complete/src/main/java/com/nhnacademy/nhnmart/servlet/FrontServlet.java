@@ -1,6 +1,8 @@
 package com.nhnacademy.nhnmart.servlet;
 
 import com.nhnacademy.nhnmart.Command;
+import com.nhnacademy.nhnmart.controller.CartGetController;
+import com.nhnacademy.nhnmart.controller.CartPostController;
 import com.nhnacademy.nhnmart.controller.FoodsController;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +21,6 @@ public class FrontServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
-        log.error("frontServlet");
         // 공통 처리 - 응답 content-type, character encoding 지정.
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
@@ -60,17 +61,17 @@ public class FrontServlet extends HttpServlet {
 
         if ("/foods.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
             command = new FoodsController();
+        } else if ("/cart.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
+            command = new CartGetController();
+        } else if ("/cart.do".equals(servletPath) && "POST".equalsIgnoreCase(method)) {
+            command = new CartPostController();
         }
-//        if ("/cart.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
-//            command = new CartListController();
-//        } else if ("/cart.do".equals(servletPath) && "POST".equalsIgnoreCase(method)) {
-//            command = new CartUpdateController();
-//        } else if ("/login.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
+//        else if ("/login.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
 //            command = new LoginFormController();
 //        } else if ("/login.do".equals(servletPath) && "POST".equalsIgnoreCase(method)) {
 //            command = new LoginProcessingController("admin", "12345");
 //        } /* .. */
 
-        return command;
+            return command;
+        }
     }
-}
