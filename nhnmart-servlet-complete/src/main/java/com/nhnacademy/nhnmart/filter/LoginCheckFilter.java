@@ -20,14 +20,14 @@ import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*",
-//    initParams = {
-//        @WebInitParam(name = "blackList", value = "/\n"
-//            + "/index.html\n"
-//            + "/login\n"
-//            + "/loginForm.html\n"
-//            + "/logout\n")
-//    })
+@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*",
+    initParams = {
+        @WebInitParam(name = "blackList", value = "/\n"
+//            + "/index.jsp\n"
+            + "/login.do\n"
+            + "/loginForm.jsp\n"
+            + "/logout.do\n")
+    })
 public class LoginCheckFilter implements Filter {
     private List<String> urls = new ArrayList<>();
 
@@ -45,6 +45,7 @@ public class LoginCheckFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
         String requestUri = ((HttpServletRequest) servletRequest).getRequestURI();
+        log.error("login check filter: requestUri - "+requestUri);
 
         if (urls.contains(requestUri)) {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -52,7 +53,7 @@ public class LoginCheckFilter implements Filter {
             HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
             if (Objects.isNull(session)) {
                 servletRequest.getServletContext().setAttribute("redirect", requestUri);
-                ((HttpServletResponse) servletResponse).sendRedirect("/login");
+                ((HttpServletResponse) servletResponse).sendRedirect("/login.do");
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 filterChain.doFilter(servletRequest, servletResponse);

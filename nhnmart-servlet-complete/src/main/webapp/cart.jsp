@@ -17,6 +17,6 @@
 </c:forEach>
 
 [Total: <c:out value="${basket.getSumPrice()}"></c:out>]<br>
-<a href='/logout'>logout</a>
+<a href='${pageContext.request.contextPath}/logout.do'>logout</a>
 </body>
 </html>

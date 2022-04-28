@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@WebFilter(filterName = "counterFilter", urlPatterns = {"/foods", "/cart"})
+@WebFilter(filterName = "counterFilter", urlPatterns = {"/foods.do", "/cart.do"})
 public class CounterFilter implements Filter {
 
     @Override
@@ -19,7 +19,7 @@ public class CounterFilter implements Filter {
 
         int count = (int) servletRequest.getServletContext().getAttribute("counter");
         servletRequest.getServletContext().setAttribute("counter", ++count);
-        log.error(String.valueOf(count));
+        log.error("counter filter: count - " + count);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

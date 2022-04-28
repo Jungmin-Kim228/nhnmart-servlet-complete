@@ -4,6 +4,9 @@ import com.nhnacademy.nhnmart.Command;
 import com.nhnacademy.nhnmart.controller.CartGetController;
 import com.nhnacademy.nhnmart.controller.CartPostController;
 import com.nhnacademy.nhnmart.controller.FoodsController;
+import com.nhnacademy.nhnmart.controller.LoginGetController;
+import com.nhnacademy.nhnmart.controller.LoginPostController;
+import com.nhnacademy.nhnmart.controller.LogoutController;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +27,7 @@ public class FrontServlet extends HttpServlet {
         // 공통 처리 - 응답 content-type, character encoding 지정.
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
+        log.error("frontservlet work");
 
         try {
 //            // 실제 요청 처리할 Servlet 결정.
@@ -37,7 +41,11 @@ public class FrontServlet extends HttpServlet {
 //            String view = (String) req.getAttribute("view");
 
             Command command = resolveCommand(req.getServletPath(), req.getMethod());
+            log.error("frontservlet: getServletPath - " + req.getServletPath());
+            log.error("frontservlet: getMethod - " + String.valueOf(req.getMethod()));
+
             String view = command.execute(req, resp);
+            log.error("frontservlet: view - " + view);
 
             if (view.startsWith(REDIRECT_PREFIX)) {
                 // `redirect:`로 시작하면 redirect 처리.
@@ -65,12 +73,13 @@ public class FrontServlet extends HttpServlet {
             command = new CartGetController();
         } else if ("/cart.do".equals(servletPath) && "POST".equalsIgnoreCase(method)) {
             command = new CartPostController();
-        }
-//        else if ("/login.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
-//            command = new LoginFormController();
-//        } else if ("/login.do".equals(servletPath) && "POST".equalsIgnoreCase(method)) {
-//            command = new LoginProcessingController("admin", "12345");
-//        } /* .. */
+        } else if ("/login.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
+            command = new LoginGetController();
+        } else if ("/login.do".equals(servletPath) && "POST".equalsIgnoreCase(method)) {
+            command = new LoginPostController("user", "1111");
+        } else if ("/logout.do".equals(servletPath) && "GET".equalsIgnoreCase(method)) {
+            command = new LogoutController();
+        } /* .. */
 
             return command;
         }
