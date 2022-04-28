@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 김 정민
-  Date: 2022-04-26
-  Time: 오후 9:28
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+<h1>Index.jsp</h1>
+<hr>
+<ul>
+  <li><a href="${pageContext.request.contextPath}/foods.do">foods page</a></li>
+  <br>
+  <li><a href="${pageContext.request.contextPath}/cart.do">cart page</a></li>
+</ul>
+</body>
 </html>

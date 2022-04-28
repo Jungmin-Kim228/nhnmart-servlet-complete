@@ -43,12 +43,6 @@ public class LoginServlet extends HttpServlet {
         } else {
             String redirect = String.valueOf(req.getServletContext().getAttribute("redirect"));
             resp.sendRedirect(redirect);
-//            PrintWriter out = resp.getWriter();
-//            out.println("Login Success");
-//            out.println("User: " + session.getAttribute("id"));
-//
-//            out.println("<a href='/foods'>/foods</a>");
-//            out.println("<a href='/logout'>/logout</a>");
         }
     }
 

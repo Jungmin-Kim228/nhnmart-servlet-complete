@@ -20,14 +20,14 @@ import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*",
-    initParams = {
-        @WebInitParam(name = "blackList", value = "/\n"
-            + "/index.html\n"
-            + "/login\n"
-            + "/loginForm.html\n"
-            + "/logout\n")
-    })
+//@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*",
+//    initParams = {
+//        @WebInitParam(name = "blackList", value = "/\n"
+//            + "/index.html\n"
+//            + "/login\n"
+//            + "/loginForm.html\n"
+//            + "/logout\n")
+//    })
 public class LoginCheckFilter implements Filter {
     private List<String> urls = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class LoginCheckFilter implements Filter {
         String requestUri = ((HttpServletRequest) servletRequest).getRequestURI();
 
         if (urls.contains(requestUri)) {
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
         } else {
             HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
             if (Objects.isNull(session)) {

@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@WebFilter(filterName = "counterFilter", urlPatterns = {"/foods", "/cart"})
+//@WebFilter(filterName = "counterFilter", urlPatterns = {"/foods", "/cart"})
 public class CounterFilter implements Filter {
 
     @Override
